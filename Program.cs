@@ -81,11 +81,33 @@ Expected result: {{1,4},{2,5},{3,6}}
  */
 int[,] InverseRec(int[,] recArray)
 {
+    int rows = recArray.GetLength(0);
+    int columns = recArray.GetLength(1);
 
+    int[,] inverseArray = new int[columns, rows];
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            inverseArray[j, i] = recArray[i, j];
+        }
+    }
+
+    return inverseArray;
 }
 int[,] arr4 = { { 1, 2, 3 }, { 4, 5, 6 } };
 int[,] arr4Inverse = InverseRec(arr4);
 /* write method to print arr4Inverse */
+Console.WriteLine("Inverse Rectangular Array:");
+for (int i = 0; i < arr4Inverse.GetLength(0); i++)
+{
+    for (int j = 0; j < arr4Inverse.GetLength(1); j++)
+    {
+        Console.Write(arr4Inverse[i, j] + " ");
+    }
+    Console.WriteLine();
+}
 
 /* 
 Challenge 5. Write a function that accepts a variable number of params of any of these types: 
