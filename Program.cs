@@ -7,11 +7,20 @@ Expected result: int[] {1,2} since 1 and 2 are both available in sub arrays.
 
 int[] CommonItems(int[][] jaggedArray)
 {
-
+    if (jaggedArray.Length == 0)
+    {
+        return Array.Empty<int>();
+    }
+    int[] commonElements = jaggedArray[0];
+    for (int i = 1; i < jaggedArray.Length; i++)
+    {
+        commonElements = commonElements.Intersect(jaggedArray[i]).ToArray();
+    }
+    return commonElements;
 }
-int[][] arr1 = { new int[] { 1, 2 }, new int[] { 2, 1, 5 } };
+int[][] arr1 = { new int[] { 1, 2, 6, 5 }, new int[] { 2, 1, 5, 19, 65, 5 } };
 int[] arr1Common = CommonItems(arr1);
-/* write method to print arr1Common */
+Console.WriteLine("Common Element: " + string.Join(", ", arr1Common));
 
 /* 
 Challenge 2. Inverse the elements of a jagged array.
@@ -20,11 +29,20 @@ Expected result: int[][] arr = {new int[]{2, 1}, new int[]{3, 2, 1}}
 */
 void InverseJagged(int[][] jaggedArray)
 {
-
+    for (int i = 0; i < jaggedArray.Length; i++)
+    {
+        Array.Reverse(jaggedArray[i]);
+    }
 }
-int[][] arr2 = { new int[] { 1, 2 }, new int[] { 1, 2, 3 } };
+
+int[][] arr2 = { new int[] { 1, 2, 4, 15, 5 }, new int[] { 1, 2, 3, 7, 17, 9 } };
 InverseJagged(arr2);
-/* write method to print arr2 */
+
+Console.WriteLine("Inverse Jagged Array:");
+for (int i = 0; i < arr2.Length; i++)
+{
+    Console.WriteLine(string.Join(", ", arr2[i]));
+}
 
 /* 
 Challenge 3.Find the difference between 2 consecutive elements of an array.
