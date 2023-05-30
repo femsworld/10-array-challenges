@@ -51,11 +51,27 @@ Expected result: int[][] arr = {new int[] {-1}, new int[]{-1, -1}}
  */
 void CalculateDiff(int[][] jaggedArray)
 {
+    for (int i = 0; i < jaggedArray.Length; i++)
+    {
+        int[] subarray = jaggedArray[i];
+        int[] diffArray = new int[subarray.Length - 1];
 
+        for (int j = 0; j < subarray.Length - 1; j++)
+        {
+            diffArray[j] = subarray[j + 1] - subarray[j];
+        }
+
+        jaggedArray[i] = diffArray;
+    }
 }
-int[][] arr3 = { new int[] { 1, 2 }, new int[] { 1, 2, 3 } };
+int[][] arr3 = { new int[] { 1, 2, 5, 8, 6 }, new int[] { 1, 2, 3, 5, 9, 11, 8 } };
 CalculateDiff(arr3);
 /* write method to print arr3 */
+Console.WriteLine("Difference Jagged Array:");
+for (int i = 0; i < arr3.Length; i++)
+{
+    Console.WriteLine(string.Join(", ", arr3[i]));
+}
 
 
 /* 
