@@ -193,8 +193,40 @@ and ask the user to input a guess.
 It’ll repeat the asking until the user puts the correct answer. */
 void GuessingGame()
 {
+    Random random = new Random();
+    int number = random.Next(1, 101);
+    bool guessedCorrectly = false;
 
+    Console.WriteLine("Welcome to the Number Guessing Game!");
+
+    while (!guessedCorrectly)
+    {
+        Console.Write("Guess a number between 1 and 100: ");
+        string input = Console.ReadLine();
+
+        if (int.TryParse(input, out int guess))
+        {
+            if (guess == number)
+            {
+                guessedCorrectly = true;
+                Console.WriteLine("Congratulations! You guessed the correct number!");
+            }
+            else if (guess < number)
+            {
+                Console.WriteLine("Too low! Try again.");
+            }
+            else
+            {
+                Console.WriteLine("Too high! Try again.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input! Please enter a valid number.");
+        }
+    }
 }
+
 GuessingGame();
 
 /* Challenge 8. Provide class Product, OrderItem, Cart, which make a feature of a store
