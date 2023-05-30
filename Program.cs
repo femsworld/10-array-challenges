@@ -109,6 +109,7 @@ for (int i = 0; i < arr4Inverse.GetLength(0); i++)
     Console.WriteLine();
 }
 
+
 /* 
 Challenge 5. Write a function that accepts a variable number of params of any of these types: 
 string, number. 
@@ -117,12 +118,34 @@ string, number.
 - Finally print everything out. 
 Example: Demo("hello", 1, 2, "world") 
 Expected result: hello world; 3 */
-void Demo()
+void Demo(params object[] values)
 {
+    string sentence = "";
+    double sum = 0;
 
+    foreach (var value in values)
+    {
+        if (value is string str)
+        {
+            sentence += str + " ";
+        }
+        else if (IsNumeric(value))
+        {
+            sum += Convert.ToDouble(value);
+        }
+    }
+
+    sentence = sentence.Trim();
+    Console.WriteLine($"{sentence}; {sum}");
 }
-Demo("hello", 1, 2, "world"); //should print out "hello world; 3"
-Demo("My", 2, 3, "daughter", true, "is");//should print put "My daughter is; 5"
+
+bool IsNumeric(object value)
+{
+    return value is int || value is double;
+}
+
+Demo("hello", 1, 2, "world", 5, 8, "today is a ", "good day"); // Output: hello world; 3
+Demo("My", 2, 3, "daughter", true, "is"); // Output: My daughter is; 5
 
 
 /* Challenge 6. Write a function to swap 2 objects but only if they are of the same type 
