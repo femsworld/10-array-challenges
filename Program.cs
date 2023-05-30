@@ -151,11 +151,42 @@ Demo("My", 2, 3, "daughter", true, "is"); // Output: My daughter is; 5
 /* Challenge 6. Write a function to swap 2 objects but only if they are of the same type 
 and if they’re string, lengths have to be more than 5. 
 If they’re numbers, they have to be more than 18. */
-void SwapTwo()
+void SwapTwo<T>(ref T obj1, ref T obj2)
 {
-
+    if (obj1.GetType() == obj2.GetType())
+    {
+        if (obj1 is string && obj2 is string && ((string)(object)obj1).Length > 5 && ((string)(object)obj2).Length > 5)
+        {
+            Swap(ref obj1, ref obj2);
+        }
+        else if (obj1 is int && obj2 is int && ((int)(object)obj1) > 18 && ((int)(object)obj2) > 18)
+        {
+            Swap(ref obj1, ref obj2);
+        }
+        else if (obj1 is double && obj2 is double && ((double)(object)obj1) > 18 && ((double)(object)obj2) > 18)
+        {
+            Swap(ref obj1, ref obj2);
+        }
+    }
 }
 
+void Swap<T>(ref T obj1, ref T obj2)
+{
+    T temp = obj1;
+    obj1 = obj2;
+    obj2 = temp;
+}
+
+string str1 = "Hello";
+string str2 = "World";
+int num1 = 20;
+int num2 = 10;
+
+SwapTwo(ref str1, ref str2);
+SwapTwo(ref num1, ref num2);
+
+Console.WriteLine($"Swapped strings: {str1}, {str2}");
+Console.WriteLine($"Swapped numbers: {num1}, {num2}");
 /* Challenge 7. Write a function that does the guessing game. 
 The function will think of a random integer number (lets say within 100) 
 and ask the user to input a guess. 
