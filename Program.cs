@@ -191,6 +191,7 @@ Console.WriteLine($"Swapped numbers: {num1}, {num2}");
 The function will think of a random integer number (lets say within 100) 
 and ask the user to input a guess. 
 It’ll repeat the asking until the user puts the correct answer. */
+
 void GuessingGame()
 {
     Random random = new Random();
@@ -201,8 +202,14 @@ void GuessingGame()
 
     while (!guessedCorrectly)
     {
-        Console.Write("Guess a number between 1 and 100: ");
+        Console.Write("Guess a number between 1 and 100 (or type 'exit' to quit): ");
         string input = Console.ReadLine();
+
+        if (input.ToLower() == "exit")
+        {
+            Console.WriteLine("Thank you for playing the game. Goodbye!");
+            return; // Exit the function and terminate the program
+        }
 
         if (int.TryParse(input, out int guess))
         {
@@ -222,7 +229,7 @@ void GuessingGame()
         }
         else
         {
-            Console.WriteLine("Invalid input! Please enter a valid number.");
+            Console.WriteLine("Invalid input! Please enter a valid number or 'exit'.");
         }
     }
 }
